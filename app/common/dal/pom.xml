@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+        <artifactId>uhomed-router-app-common-parent</artifactId>
+        <groupId>com.uhomed.router</groupId>
+        <version>1.0</version>
+    </parent>
+	<groupId>com.uhomed.router</groupId>
+	<artifactId>uhomed-router-common-dal</artifactId>
+	<version>1.0</version>
+	<name>uhomed-router-common-dal</name>
+	<packaging>jar</packaging>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>com.uhomed.router</groupId>
+			<artifactId>uhomed-router-common-core</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.uhomed.router</groupId>
+			<artifactId>uhomed-router-common-model</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+		<!-- druid -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>druid</artifactId>
+			<version>1.1.8</version>
+		</dependency>
+
+		<!--pagehelper-->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+			<version>1.2.3</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
+
+
+	</dependencies>
+	<build>
+		<plugins>
+
+		</plugins>
+	</build>
+</project>

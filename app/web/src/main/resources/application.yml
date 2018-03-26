@@ -1,0 +1,21 @@
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath:config/mybatis/*.xml
+#  type-aliases-package: com.springboot.test.dao
+  config-locations: classpath:config/deploy/mybatis-config.xml
+
+
+#pagehelper分页插件
+pagehelper:
+    helperDialect: mysql
+    reasonable: true
+    supportMethodsArguments: true
+    params: count=countSql
+
+logging:
+#    config: classpath:${spring.profiles.active}/logback.xml
+    config: file:${user.dir}/config/${spring.profiles.active}/logback.xml
+
+

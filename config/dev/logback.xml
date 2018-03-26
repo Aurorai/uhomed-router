@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!--引入默认的一些设置-->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!--web信息-->
+    <logger name="org.springframework" level="info"/>
+    <!-- zookeeper信息 -->
+    <logger name="org.apache.zookeeper" level="info"/>
+    <logger name="com.alibaba.dubbo" level="info"/>
+    <logger name="com.alibaba.com.caucho" level="off"/>
+
+
+    <!--写入日志到控制台的appender,用默认的,但是要去掉charset,否则windows下tomcat下乱码-->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${CONSOLE_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+    <property name="LOGS.PATH" value="/Users/liming/logs/uhomed-router"/>
+    <!--写入日志到文件的appender-->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名,每天一个文件-->
+            <FileNamePattern>${LOGS.PATH}.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--日志文件保留天数-->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+        <!--日志文件最大的大小-->
+        <triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
+    </appender>
+
+    <!--异步到文件-->
+    <appender name="asyncFileAppender" class="ch.qos.logback.classic.AsyncAppender">
+        <discardingThreshold>0</discardingThreshold>
+        <queueSize>500</queueSize>
+        <appender-ref ref="FILE"/>
+    </appender>
+
+    <!-- 异常日志 -->
+    <appender name="EXCEPTION_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS.PATH}/exception.log</file>
+        <append>true</append>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!--<receiver>balancebug@163.com</receiver>-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS.PATH}/exception.log.%d{yyyy-MM-dd}_%i</fileNamePattern>
+            <maxHistory>7</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>500MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %c{1} %L [%p] %m%n %caller{0}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 服务执行日志 -->
+    <appender name="DEFAULT_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <file>${LOGS.PATH}/root.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS.PATH}/root.log.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <pattern>%date|%thread|%X{invokeNo}|%msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.mybatis" level="info" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+    <logger name="com.uhomed.router.model" level="info" additivity="false">
+        <appender-ref ref="CONSOLE"/>
+    </logger>
+
+
+    <!--生产环境:打印控制台和输出到文件-->
+    <!--<springProfile name="prod">-->
+    <!--<root level="info">-->
+    <!--<appender-ref ref="CONSOLE"/>-->
+    <!--<appender-ref ref="asyncFileAppender"/>-->
+    <!--</root>-->
+    <!--</springProfile>-->
+
+
+    <!--测试环境:打印控制台-->
+    <!--<springProfile name="test">-->
+    <!--&lt;!&ndash; 打印sql &ndash;&gt;-->
+    <!--<logger name="com.yunchuang.dao" level="DEBUG"/>-->
+    <!--<root level="info">-->
+    <!--<appender-ref ref="CONSOLE"/>-->
+    <!--</root>-->
+    <!--</springProfile>-->
+
+    <!--开发环境:打印控制台-->
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="DEFAULT_APPENDER"/>
+    </root>
+
+
+</configuration>
