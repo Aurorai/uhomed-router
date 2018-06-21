@@ -10,7 +10,7 @@ import org.springframework.context.annotation.PropertySource;
  * @version $$Id: , v 0.1    Exp $$
  */
 @Configuration
-@PropertySource("file:${user.dir}/config/${spring.profiles.active}/basic.properties")
+@PropertySource("file:${base.dir}/config/${spring.profiles.active}/basic.properties")
 public class BasicProperties {
 
 

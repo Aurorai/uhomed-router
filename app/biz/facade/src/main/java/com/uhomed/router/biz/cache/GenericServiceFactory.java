@@ -29,7 +29,7 @@ public class GenericServiceFactory {
 	private static final Logger													INIT_RPC_LOGGER			= LoggerFactory
 			.getLogger( GenericServiceFactory.class );
 	
-	private static final String													DUBBO_NAME				= "xkhstar-server-provider";
+	private static final String													DUBBO_NAME				= "lego-workbench-service-new";
 	
 	private static final String													REGISTER_CENTER			= "zookeeper";
 	
@@ -81,6 +81,7 @@ public class GenericServiceFactory {
 				reference.setApplication( applicationConfig );
 				reference.setRegistry( registryConfig );
 				reference.setConsumer( consumerConfig );
+				reference.setVersion("1.0.0");
 				// reference.setProtocol("dubbo");
 				// reference.setVersion(dubboVersion);
 				// reference.setLoadbalance("uhomed-loadbalance");

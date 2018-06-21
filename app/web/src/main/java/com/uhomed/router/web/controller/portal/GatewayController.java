@@ -7,20 +7,17 @@ package com.uhomed.router.web.controller.portal;
 import cn.hutool.core.util.StrUtil;
 import com.uhomed.router.biz.cache.dto.MethodCacheDTO;
 import com.uhomed.router.biz.cache.local.MethodCache;
-import com.uhomed.router.biz.config.BasicProperties;
 import com.uhomed.router.biz.context.MethodTypeContext;
 import com.uhomed.router.biz.exception.ParamException;
 import com.uhomed.router.biz.exception.RequestException;
 import com.uhomed.router.biz.request.ParamsUtil;
 import com.uhomed.router.biz.request.Request;
 import com.uhomed.router.biz.sync.SyncUtils;
-import com.uhomed.router.biz.util.SignUtil;
-import com.uhomed.router.core.context.RunStatusContext;
 import com.uhomed.router.core.utils.logger.LoggerUtils;
 import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -33,7 +30,7 @@ import java.util.Map;
  * @author liming
  * @version $Id: GatewayController.java, v 0.1 2017年7月2日 下午2:54:08 liming Exp $
  */
-@Controller
+@RestController
 public class GatewayController implements Serializable {
 	
 	@Resource
@@ -76,18 +73,18 @@ public class GatewayController implements Serializable {
 		}
 		
 		// 非开发环境，验证签名
-		if (!(BasicProperties.RUN_STATUS == RunStatusContext.DEV)) {
-			boolean v = SignUtil.verifiSign( method, version, bizParams, sign, timestamp, sso );
-			if (!v) {
-				setFailMessage( result, "signature error", "444444" );
-				return result;
-			}
-		}
+//		if (!(BasicProperties.RUN_STATUS == RunStatusContext.DEV)) {
+//			boolean v = SignUtil.verifiSign( method, version, bizParams, sign, timestamp, sso );
+//			if (!v) {
+//				setFailMessage( result, "signature error", "444444" );
+//				return result;
+//			}
+//		}
 		// 默认为json
-		if (format != null && suff.contains( format.toLowerCase() )) {
-			setFailMessage( result, "format error", "444445" );
-			return result;
-		}
+//		if (format != null && suff.contains( format.toLowerCase() )) {
+//			setFailMessage( result, "format error", "444445" );
+//			return result;
+//		}
 		
 		MethodCacheDTO methodDTO = this.methodCache.getMethod( method, version );
 		if (methodDTO == null) {
@@ -124,11 +121,12 @@ public class GatewayController implements Serializable {
 				boolean isLock = SyncUtils.lock( lockKey, 2 );
 				try {
 					if (isLock) {
-						Map<String,?> o = this.call(sso,params,methodDTO,router,httpServletRequest);
-						if (o != null) {
-							result.getModelMap().addAllAttributes( o );
-							return result;
-						}
+//						Map<String,?> o = this.call(sso,params,methodDTO,router,httpServletRequest);
+//						if (o != null) {
+//							result.getModelMap().addAllAttributes( o );
+//							return result;
+//						}
+						return this.call(sso,params,methodDTO,router,httpServletRequest);
 					} else {
 						setFailMessage( result, "请勿重复提交！", "400000" );
 						return result;
@@ -140,11 +138,12 @@ public class GatewayController implements Serializable {
 				}
 				
 			} else {
-				Map<String,?> o = this.call(sso,params,methodDTO,router,httpServletRequest);
-				if (o != null) {
-					result.getModelMap().addAllAttributes( o );
-					return result;
-				}
+//				Map<String,?> o = this.call(sso,params,methodDTO,router,httpServletRequest);
+//				if (o != null) {
+//					result.getModelMap().addAllAttributes( o );
+//					return result;
+//				}
+				return this.call(sso,params,methodDTO,router,httpServletRequest);
 			}
 			
 		} catch (ParamException e) {
@@ -168,7 +167,7 @@ public class GatewayController implements Serializable {
 		return result;
 	}
 	
-	private Map<String, ?> call(String sso, Map<String, Object> params, MethodCacheDTO methodDTO, String router,
+	private Object call(String sso, Map<String, Object> params, MethodCacheDTO methodDTO, String router,
 			HttpServletRequest httpServletRequest) throws RequestException {
 
 		Request request = null;
@@ -178,15 +177,15 @@ public class GatewayController implements Serializable {
 		}else if(methodDTO.getType() == MethodTypeContext.HTTP){
 			request = requestHttp;
 		}
-		Object o = request.request( sso, params, methodDTO, router, httpServletRequest );
-		try {
-			if (o != null) {
-				return (Map<String, ?>) o;
-			}
-		} catch (ClassCastException e) {
-			throw new RequestException("返回值类型错误！");
-		}
-		return null;
+		return request.request( sso, params, methodDTO, router, httpServletRequest );
+//		try {
+//			if (o != null) {
+//				return (Map<String, ?>) o;
+//			}
+//		} catch (ClassCastException e) {
+//			throw new RequestException("返回值类型错误！");
+//		}
+//		return null;
 	}
 	
 	/**

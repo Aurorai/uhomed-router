@@ -1,1 +1,4 @@
 build
+web/dist
+uhomed-router-parent.ipr
+uhomed-router-parent.iws

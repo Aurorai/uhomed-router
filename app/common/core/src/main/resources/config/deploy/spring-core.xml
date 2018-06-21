@@ -27,32 +27,32 @@
 		<property name="queueCapacity" value="200" />
 	</bean>
 
-	<bean
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
-			<list>
-				<value><!-- antx.properties 配置 --></value>
-			</list>
-		</property>
-	</bean>
+	<!--<bean-->
+		<!--class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">-->
+		<!--<property name="locations">-->
+			<!--<list>-->
+				<!--<value>&lt;!&ndash; antx.properties 配置 &ndash;&gt;</value>-->
+			<!--</list>-->
+		<!--</property>-->
+	<!--</bean>-->
 
 	<context:annotation-config />
 
 	<!-- 告诉velocity模板位置 -->
-	<bean id="velocityConfigurer"
+<!--	<bean id="velocityConfigurer"
 		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
 		<property name="resourceLoaderPath">
 			<value>WEB-INF/template</value>
 		</property>
 		<property name="configLocation" value="classpath:config/deploy/velocity.properties" />
-	</bean>
+	</bean>-->
 
 
 	<!-- spring bean handler -->
-	<bean id="beanUtils" class="com.uhomed.router.core.utils.spring.BeanUtils" />
+	<!--<bean id="beanUtils" class="com.uhomed.router.core.utils.spring.BeanUtils" />-->
 
 	<!-- 配置spring 的 email服务 -->
-	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
+<!--	<bean id="sender" class="org.springframework.mail.javamail.JavaMailSenderImpl"
 		p:host="${email.from.host}" p:username="${email.from.username}"
 		p:password="${email.from.password}">
 		<property name="javaMailProperties">
@@ -60,18 +60,18 @@
 				<prop key="mail.smtp.auth">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
 
 	<!-- 发送email处理程序 -->
-	<bean id="mailHandler" class="com.uhomed.router.core.email.handler.MailHandler">
+	<!--<bean id="mailHandler" class="com.uhomed.router.core.email.handler.MailHandler">
 		<property name="sender" ref="sender" />
 		<property name="velocityConfigurer" ref="velocityConfigurer" />
 		<property name="fromUserName" value="${email.from.username}" />
-	</bean>
+	</bean>-->
 	<!-- 异步邮件 -->
-	<bean id="sendEmailAsync" class="com.uhomed.router.core.email.SendEmailAsync">
+	<!--<bean id="sendEmailAsync" class="com.uhomed.router.core.email.SendEmailAsync">
 		<property name="mailHandler" ref="mailHandler" />
 		<property name="threadPoolTaskExecutor" ref="threadPoolTaskExecutor" />
-	</bean>
+	</bean>-->
 
 </beans>

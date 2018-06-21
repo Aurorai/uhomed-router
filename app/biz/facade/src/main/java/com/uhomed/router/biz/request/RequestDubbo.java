@@ -21,6 +21,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.UndeclaredThrowableException;
 import java.util.*;
 
 /**
@@ -79,7 +80,7 @@ public class RequestDubbo implements Request {
 					+ router + "&runtime=true" );
 			registry.register( url );
 			try {
-				Thread.sleep( 100l );
+				Thread.sleep( 100L );
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -126,7 +127,9 @@ public class RequestDubbo implements Request {
 			}
 			result.addObject( "code", "100001" );
 			LoggerUtils.defaultPrint( e, "rpc request method [" + methodDTO.getApiMethodCode() + "]" );
-		} catch (Exception e) {
+		} catch (UndeclaredThrowableException e){
+
+		}catch (Exception e) {
 			LoggerUtils.defaultPrint( e, "rpc request method [" + methodDTO.getApiMethodCode() + "]" );
 			throw new RpcException( "网络繁忙，请稍候再试！" );
 			
@@ -139,7 +142,9 @@ public class RequestDubbo implements Request {
 		}
 		return result;
 	}
-	
+
+
+
 	/**
 	 * @param sso
 	 * @param method

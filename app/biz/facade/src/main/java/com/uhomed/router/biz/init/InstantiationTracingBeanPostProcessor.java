@@ -31,6 +31,7 @@ public class InstantiationTracingBeanPostProcessor implements ApplicationListene
         this.onlineParamsFacade.initCache();
 
 		System.out.println("=====================   启动自定义服务完成！  =====================");
+
     }
 
 }

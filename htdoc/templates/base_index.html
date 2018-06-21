@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="/module/on_loadcss :: onLoadCss('首页')">
+
+</head>
+
+<body>
+<div class="pace-done">
+    <div id="wrapper">
+        <nav class="navbar-default navbar-static-side" role="navigation" th:include="/module/left :: leftNav">
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg dashbard-1">
+            <div class="row border-bottom" th:include="/module/common :: searchTab">
+            </div>
+            <div class="row  border-bottom white-bg dashboard-header">
+                <div class="col-lg-10">
+                    <h2>Layouts</h2>
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="base_index.html">控制台</a>
+                        </li>
+                        <li class="active">
+                            <strong>分组管理</strong>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="wrapper wrapper-content">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="ibox float-e-margins">
+                                    <div class="ibox-title">
+                                        <h5>Editable Table in- combination with jEditable</h5>
+                                        <div class="ibox-tools">
+                                            <a class="collapse-link">
+                                                <i class="fa fa-chevron-up"></i>
+                                            </a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                                <i class="fa fa-wrench"></i>
+                                            </a>
+                                            <ul class="dropdown-menu dropdown-user">
+                                                <li><a href="#">Config option 1</a>
+                                                </li>
+                                                <li><a href="#">Config option 2</a>
+                                                </li>
+                                            </ul>
+                                            <a class="close-link">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="ibox-content">
+                                        <div class="layui-form">
+                                            <table class="layui-table" lay-even="" lay-skin="row">
+                                                <colgroup>
+                                                    <col width="150">
+                                                    <col width="150">
+                                                    <col width="200">
+                                                    <col>
+                                                </colgroup>
+                                                <thead>
+                                                <tr>
+                                                    <th>人物</th>
+                                                    <th>民族</th>
+                                                    <th>出场时间</th>
+                                                    <th>格言</th>
+                                                </tr>
+                                                </thead>
+                                                <tfoot>
+                                                <tr>
+                                                    <th colspan="4">
+                                                        <div id="demo1" style="text-align: right">
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                                </tfoot>
+                                                <tbody>
+                                                <tr>
+                                                    <td>孟子</td>
+                                                    <td>华夏族（汉族）</td>
+                                                    <td>公元前-372年</td>
+                                                    <td>猿强，则国强。国强，则猿更强！</td>
+                                                </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer" th:include="/module/common :: footer"/>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Mainly scripts -->
+
+
+<script src="/resources/layui/layui.js" charset="utf-8"></script>
+<script>
+    layui.use(['laypage', 'layer'], function () {
+        var laypage = layui.laypage
+            , layer = layui.layer;
+
+        //总页数大于页码总数
+        laypage.render({
+            elem: 'demo1'
+            , count: 10000 //数据总数
+            , jump: function (obj) {
+                console.log(obj)
+            }
+            ,theme:'#FF5722'
+        });
+
+    });
+</script>
+</body>
+</html>

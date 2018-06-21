@@ -13,7 +13,6 @@
         <property name="password" value="${spring.datasource.password}"/>
         <property name="driverClassName" value="${spring.datasource.driverClassName}"/>
 
-
         <!-- 配置初始化大小、最小、最大 -->
         <property name="initialSize" value="${spring.datasource.initialSize:5}"/>
         <property name="minIdle" value="${spring.datasource.minIdle:5}"/>
@@ -42,21 +41,10 @@
         <property name="filters" value="${spring.datasource.filters}"/>
 
         <property name="connectionProperties" value="{spring.datasource.connectionProperties}"/>
+
     </bean>
     <!-- ### 配置数据源  end ###-->
 
-    <!-- 配置扫描Mapper接口的包路径 -->
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.hry.spring.mybatis.mapper"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
-    </bean>
-
-    <!-- ### Mybatis和事物配置  end ###-->
-
-    <!-- jdbcTemplate config -->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="dataSource"/>
-    </bean>
 
     <bean id="dynamicDataSource" class="com.uhomed.router.dal.datasource.DynamicDataSource">
         <property name="targetDataSources">
@@ -69,21 +57,11 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dynamicDataSource"/>
-        <!--<property name="dataSource" ref="dynamicDataSource" />-->
         <property name="mapperLocations" value="classpath:config/mybatis/*.xml"/>
         <property name="configLocation" value="classpath:config/deploy/mybatis-config.xml"/>
-        <property name="plugins">
-            <array>
-                <bean class="com.github.pagehelper.PageHelper">
-                    <property name="properties">
-                        <value>
-                            dialect=mysql
-                        </value>
-                    </property>
-                </bean>
-            </array>
-        </property>
     </bean>
+
+
 
     <!--<context:annotation-config />-->
     <!--<context:component-scan base-package="com.uhomed.router.dal.dao"-->

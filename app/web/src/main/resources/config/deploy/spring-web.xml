@@ -23,5 +23,11 @@
 		<aop:advisor pointcut-ref="statisticsPoint"
 					 advice-ref="statisticsInterceptor"/>
 	</aop:config>-->
-	
+	<import resource="classpath*:config/deploy/spring-core.xml" />
+	<import resource="classpath*:config/deploy/spring-dal.xml" />
+	<import resource="classpath*:config/deploy/spring-biz-service.xml" />
+	<import resource="classpath*:config/deploy/spring-biz-facade.xml" />
+	<import resource="classpath*:config/deploy/spring-biz-task.xml" />
+
+
 </beans>  

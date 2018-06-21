@@ -1,0 +1,67 @@
+#!/bin/bash
+
+
+function build(){
+    echo "build..."
+    cd ../ && mvn clean package
+}
+
+function start() {
+    cd ../
+    java -jar build/uhomed-router-web-1.0.jar --spring.profiles.active=dev &
+}
+
+function stop() {
+    echo "stop"
+    echo "----------------"
+}
+
+function restart() {
+    echo "restart"
+    echo "----------------"
+    stop
+    start
+}
+
+function status(){
+     java_id=$(ps -ef |grep java |grep -w 'java'|grep -v 'grep'|awk '{print $2}')
+     if [[ "$java_id" = "" ]]
+     then
+        echo "java run successful"
+     else
+        echo "java process not exists"
+     fi
+}
+
+case "$1" in
+    start )
+        echo "****************"
+        start
+        echo "****************"
+        ;;
+    stop )
+        echo "****************"
+        stop
+        echo "****************"
+        ;;
+    restart )
+        echo "****************"
+        restart
+        echo "****************"
+        ;;
+    build )
+        build
+        ;;
+    status )
+        status
+        ;;
+    * )
+        echo "****************"
+        echo "{start|stop|restart|status}"
+        echo "****************"
+        ;;
+esac
+
+#mvn spring-boot:run -Drun.arguments="--spring.profiles.active=dev"
+#cd ../ && mvn clean package
+#java -jar build/uhomed-router-web-1.0.jar --spring.profiles.active=dev

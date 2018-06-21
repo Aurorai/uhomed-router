@@ -1,0 +1,257 @@
+// @import 'reset.less';
+@import 'core.less';
+@import 'uikit/index.less';
+
+// 重定义iview模块样式
+.preview .ivu-modal-body{
+    padding: 0;
+}
+
+// 求Body的上下边框
+.betaview .ivu-modal-body{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.ivu-modal{
+    margin-bottom: 40px;
+}
+.ivu-modal-header,.ivu-modal-footer{
+    border-top: none;
+    border-bottom: none;
+}
+
+// flex盒子
+.flex-box{
+    .mix-flex-box();
+}
+.flex{
+    .mix-flex();
+}
+
+// 间隙
+.space{
+    margin-top: 20px;
+}
+.space-min{
+    margin-top: 10px;
+}
+
+// 浮动
+.fl{
+    float: left;
+}
+
+.fr{
+    float: right;
+}
+.clearfix:after{
+    display: block;
+    content: '';
+    clear: both;
+}
+
+// 小图片
+.mini-pic{
+    width: 50px;
+    padding: 5px 0;
+    border-radius: 50px;
+    img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+    }
+}
+
+// 内容分割
+.tags-title{
+    font-size: 14px;
+    color: #80848f;
+    margin-bottom: 5px;
+}
+
+// a 超链文字属性
+.hyper-text{
+    color: #495060;
+    a{
+        color: #495060;
+    }
+}
+
+// 重定义 el-table
+.iel-table{
+    &.el-table{
+        border: 1px solid #e9eaec;
+        font-size: 12px;
+        color: #495060;
+        border-bottom: 0;
+        border-right: 0;
+        overflow: visible;
+        th{
+            background-color: #f8f8f9;
+        }
+        td,th.is-leaf{
+            border-bottom: 1px solid #e9eaec;
+        }
+    }
+    .el-table__header-wrapper thead div{
+        background-color: #f8f8f9;
+    }
+    .el-table__body tr.hover-row>td{
+        background-color: #ebf7ff;
+    }
+    &.el-table--enable-row-hover .el-table__body tr:hover>td {
+        background-color: #ebf7ff;
+    }
+    .el-table__fixed-header-wrapper thead div{
+        background-color: #f8f8f9;
+    }
+    .el-table__body-wrapper{
+        overflow: visible;
+    }
+}
+
+// 居中
+.align-center{
+    text-align: center;
+}
+
+.col-05{
+    width: 50px;
+}
+
+.col-1{
+    width: 100px;
+}
+
+.col-2{
+    width: 200px;
+}
+
+.col-3{
+    width: 300px;
+}
+
+.col-4{
+    width: 400px;
+}
+
+.col-5{
+    width: 500px;
+}
+.col-6{
+    width: 600px;
+}
+.col-7{
+    width: 700px;
+}
+.col-8{
+    width: 800px;
+}
+.col-9{
+    width: 900px;
+}
+
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  border-radius: 4px;
+  background-image: url('../assets/blueprint.png');
+  background-size: 30px;
+  max-height: 70vh;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}

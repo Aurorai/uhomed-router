@@ -17,4 +17,19 @@ public class IndexController {
         mv.addObject("ccc","222");
         return mv;
     }
+
+    @RequestMapping("/indexx")
+    public ModelAndView indexx(){
+        ModelAndView mv = new ModelAndView();
+        mv.addObject("ccc","222");
+        return mv;
+    }
+
+
+    @RequestMapping("/login")
+    public ModelAndView login(){
+        ModelAndView mv = new ModelAndView();
+        return mv;
+    }
+
 }

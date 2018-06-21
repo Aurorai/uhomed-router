@@ -37,9 +37,5 @@ public class FastJsonJsonpView extends FastJsonJsonView {
 			response.getOutputStream().write( "_callback is null...".getBytes( getCharset() ) );
 		}
 	}
-	
-	public FastJsonJsonpView() {
-		setContentType( DEFAULT_CONTENT_TYPE );
-		setExposePathVariables( false );
-	}
+
 }

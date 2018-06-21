@@ -69,5 +69,4 @@ public interface OnlineParamsFacade {
 	void initCache();
 
 
-	
 }

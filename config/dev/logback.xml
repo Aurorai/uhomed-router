@@ -9,6 +9,8 @@
     <logger name="org.apache.zookeeper" level="info"/>
     <logger name="com.alibaba.dubbo" level="info"/>
     <logger name="com.alibaba.com.caucho" level="off"/>
+    <logger name="org.thymeleaf" level="info"/>
+    <logger name="org.I0Itec.zkclient" level="info"/>
 
 
     <!--写入日志到控制台的appender,用默认的,但是要去掉charset,否则windows下tomcat下乱码-->
