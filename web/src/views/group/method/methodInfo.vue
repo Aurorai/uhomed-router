@@ -61,6 +61,14 @@
                 <FormItem label="methodName" prop="methodName">
                     <Input v-model="formValidate.methodName" placeholder="test" class="col-3"></Input>
                 </FormItem>
+                <FormItem label="注册中心类型" prop="registerType">
+                    <Select v-model="formValidate.registerType" placeholder="请选择" class="col-1">
+                        <Option value="zookeeper">zookeeper</Option>
+                    </Select>
+                </FormItem>
+                <FormItem label="注册中心地址" prop="registerAddress">
+                    <Input v-model="formValidate.registerAddress" placeholder="test" class="col-3"></Input>
+                </FormItem>
             </div>
             <div v-else-if="formValidate.type == 'HTTP'">
                 http
@@ -104,7 +112,7 @@
                 <el-table-column label="来源" width="180">
                     <template scope="param">
                         <Select v-model="param.row.resource" class="col-1" :transfer='true'>
-                            <Option value="BIZ_PARAMS">biaParams</Option>
+                            <Option value="BIZ_PARAMS">bizParams</Option>
                             <Option value="REQUEST_BODY">RequestBody</Option>
                             <Option value="URL">URL</Option>
                             <Option value="HEADERS">header</Option>
@@ -130,6 +138,12 @@
                         <Input v-model="param.row.defaultValue" placeholder="请输入..." class="col-1"></Input>
                     </template>
                 </el-table-column>
+                <el-table-column  label="clazz">
+                    <template scope="param">
+                        <Input v-model="param.row.clazz" placeholder="请输入..." class="col-1"></Input>
+                    </template>
+                </el-table-column>
+                
                 <el-table-column label="操作" width="240px">
                     <template scope="param">
                         <ButtonGroup>
@@ -186,7 +200,9 @@ export default {
                 classPath: null,
                 methodName: null,
                 type: null,
-                groupCode: this.$route.query.groupCode
+                groupCode: this.$route.query.groupCode,
+                registerType: null,
+                registerAddress: null
             },
             ruleValidate: {
                 apiMethodCode: [
@@ -290,6 +306,8 @@ export default {
                         classPath: this.formValidate.classPath,
                         methodName: this.formValidate.methodName,
                         groupCode: this.formValidate.groupCode,
+                        registerAddress: this.formValidate.registerAddress,
+                        registerType: this.formValidate.registerType,
                         params: JSON.stringify(this.datas)
                     };
                     let response = null;
@@ -334,6 +352,8 @@ export default {
             if (data.type == 'DUBBO') {
                 this.formValidate.classPath = response.dubbo.classPath;
                 this.formValidate.methodName = response.dubbo.methodName;
+                this.formValidate.registerType = response.dubbo.registerType;
+                this.formValidate.registerAddress = response.dubbo.registerAddress;
                 this.datas = response.params;
             }
         }

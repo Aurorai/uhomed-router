@@ -16,7 +16,6 @@ import com.uhomed.router.biz.sync.SyncUtils;
 import com.uhomed.router.core.utils.logger.LoggerUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -53,7 +52,7 @@ public class GatewayController implements Serializable {
 	 * @param timestamp
 	 * @return
 	 */
-	@RequestMapping(value = "/gateway", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "/gateway")
 	public Object gateway(String method, String bizParams, String version, String format, String sso, String timestamp,
 			String client, String clientVersion, String router, HttpServletRequest httpServletRequest, String sign) {
 		

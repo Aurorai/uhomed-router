@@ -1,12 +1,5 @@
 package com.uhomed.router.biz.cache.local;
 
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
-
 import com.alibaba.druid.util.StringUtils;
 import com.google.common.base.Joiner;
 import com.uhomed.router.biz.cache.GenericServiceFactory;
@@ -15,6 +8,11 @@ import com.uhomed.router.biz.cache.dto.MethodDTO;
 import com.uhomed.router.biz.cache.dto.MethodParamCacheDTO;
 import com.uhomed.router.biz.context.MethodTypeContext;
 import com.uhomed.router.biz.facade.MethodFacade;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author
@@ -40,6 +38,7 @@ public class MethodCache {
 									String mode, List<MethodParamCacheDTO> params, MethodDTO method, boolean cache, Integer second, Integer concurrent) {
 		MethodCacheDTO dto = new MethodCacheDTO( id, apiMethodCode, apiMethodVersion, StringUtils.equals( status, "Y" ),
 				StringUtils.equals( verifiSso, "Y" ), type, mode, params, method,cache,second ,concurrent);
+		GenericServiceFactory.clear(id.toString());
 		GenericServiceFactory.buildGenericService( dto );
 		this.methodCache.put( this.buildKey( apiMethodCode, apiMethodVersion ), dto );
 		return dto;

@@ -38,5 +38,7 @@ public class MethodParamView implements Serializable {
 	private Integer				minLength;
 	
 	private String				resource;
+
+	private String 				clazz;
 	
 }

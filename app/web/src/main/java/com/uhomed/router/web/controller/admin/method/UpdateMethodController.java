@@ -29,7 +29,7 @@ public class UpdateMethodController extends BaseController {
 	
 	@RequestMapping(value = "/admin/method/updateDubbo", method = { RequestMethod.POST })
 	public ModelAndView update(Integer id, String apiMethodCode, String apiMethodName, String apiMethodVersion, String status, String verifiSso,
-			String mode, String methodDesc, String classPath, String methodName,String params) {
+			String mode, String methodDesc, String classPath, String methodName,String params,String registerType,String registerAddress) {
 		ModelAndView result = new ModelAndView();
 
 		List<MethodParam> paramList = null;
@@ -39,7 +39,7 @@ public class UpdateMethodController extends BaseController {
 
 
 		Result<String> r = this.methodFacade.updateMethod( id, apiMethodCode, apiMethodName, apiMethodVersion, status, verifiSso, mode, methodDesc,
-				MethodTypeContext.DUBBO.toString(),classPath,methodName ,paramList);
+				MethodTypeContext.DUBBO.toString(),classPath,methodName ,paramList,registerType,registerAddress);
 		super.setResultModel( result, r );
 		return result;
 	}

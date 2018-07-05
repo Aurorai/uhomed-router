@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @version $$Id : , v 0.1 Exp $$
  */
 public class MethodDubbo implements Serializable {
-	
+
 	private static final long	serialVersionUID	= -2475023589582369873L;
 	/** 方法id */
 	private Integer				methodId;
@@ -17,7 +17,27 @@ public class MethodDubbo implements Serializable {
 	private String				classPath;
 	/** 方法名 */
 	private String				methodName;
-	
+
+	private String				registerType;
+
+	private String				registerAddress;
+
+	public String getRegisterType() {
+		return registerType;
+	}
+
+	public void setRegisterType(String registerType) {
+		this.registerType = registerType;
+	}
+
+	public String getRegisterAddress() {
+		return registerAddress;
+	}
+
+	public void setRegisterAddress(String registerAddress) {
+		this.registerAddress = registerAddress;
+	}
+
 	/**
 	 * Gets method id.
 	 *
@@ -26,16 +46,17 @@ public class MethodDubbo implements Serializable {
 	public Integer getMethodId() {
 		return methodId;
 	}
-	
+
 	/**
 	 * Sets method id.
 	 *
-	 * @param methodId the method id
+	 * @param methodId
+	 *            the method id
 	 */
 	public void setMethodId(Integer methodId) {
 		this.methodId = methodId;
 	}
-	
+
 	/**
 	 * Gets class path.
 	 *
@@ -44,16 +65,17 @@ public class MethodDubbo implements Serializable {
 	public String getClassPath() {
 		return classPath;
 	}
-	
+
 	/**
 	 * Sets class path.
 	 *
-	 * @param classPath the class path
+	 * @param classPath
+	 *            the class path
 	 */
 	public void setClassPath(String classPath) {
 		this.classPath = classPath;
 	}
-	
+
 	/**
 	 * Gets method name.
 	 *
@@ -62,11 +84,12 @@ public class MethodDubbo implements Serializable {
 	public String getMethodName() {
 		return methodName;
 	}
-	
+
 	/**
 	 * Sets method name.
 	 *
-	 * @param methodName the method name
+	 * @param methodName
+	 *            the method name
 	 */
 	public void setMethodName(String methodName) {
 		this.methodName = methodName;

@@ -25,11 +25,11 @@
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
             <tx:method name="query*" read-only="true" />
-            <tx:method name="create*" propagation="REQUIRED" />
-            <tx:method name="delete*" propagation="REQUIRED" />
-            <tx:method name="update*" propagation="REQUIRED" />
-            <tx:method name="batch*" propagation="REQUIRED" />
-            <tx:method name="set*" propagation="REQUIRED" />
+            <tx:method name="create*" />
+            <tx:method name="delete*" />
+            <tx:method name="update*" />
+            <tx:method name="batch*" />
+            <tx:method name="set*" />
         </tx:attributes>
     </tx:advice>
     

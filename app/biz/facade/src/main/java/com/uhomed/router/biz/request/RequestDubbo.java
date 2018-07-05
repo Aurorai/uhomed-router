@@ -11,7 +11,6 @@ import com.alibaba.dubbo.rpc.service.GenericService;
 import com.uhomed.router.biz.cache.GenericServiceFactory;
 import com.uhomed.router.biz.cache.dto.MethodCacheDTO;
 import com.uhomed.router.biz.cache.dto.MethodDubboDTO;
-import com.uhomed.router.biz.config.BasicProperties;
 import com.uhomed.router.biz.exception.ParamException;
 import com.uhomed.router.core.utils.DateUtils;
 import com.uhomed.router.core.utils.logger.LoggerUtils;
@@ -74,7 +73,7 @@ public class RequestDubbo implements Request {
 			RegistryFactory registryFactory = ExtensionLoader.getExtensionLoader( RegistryFactory.class )
 					.getAdaptiveExtension();
 			registry = registryFactory.getRegistry(
-					URL.valueOf( "zookeeper://" + BasicProperties.ZOOKEEPER_IP ) );
+					URL.valueOf( "zookeeper://" + dubbo.getRegisterAddress() ) );
 			url = URL.valueOf( "condition://0.0.0.0/" + dubbo.getClassPath()
 					+ "?category=routers&dynamic=false&enabled=true&force=true&name=ss&priority=12&router=condition&rule==> provider.host = "
 					+ router + "&runtime=true" );
@@ -95,6 +94,7 @@ public class RequestDubbo implements Request {
 			types.toArray( strings );
 			// image
 			Object o = genericService.$invoke( dubbo.getMethodName(), strings, values.toArray() );
+
 			DEFAULT_LOGGER.info( "rpc request method [" + methodDTO.getApiMethodCode() + "] time ["
 					+ (System.currentTimeMillis() - rpcTime) + "ms]" );
 			if (o != null) {
@@ -114,7 +114,8 @@ public class RequestDubbo implements Request {
 			}
 		} catch (RpcException e) {
 			result.addObject( "status", false );
-			if (e.getMessage().contains( "Please check if the providers have been started and registered" )) {
+			if (e.getMessage().contains( "Please check if the providers have been started and registered" )
+					|| e.getMessage().contains("may be providers disabled or not registered")) {
 				if (StrUtil.isNotEmpty( router )) {
 					result.addObject( "message", "router:" + router + "未发现服务接口" );
 				} else {

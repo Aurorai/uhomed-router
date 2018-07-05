@@ -26,7 +26,7 @@ public class CreateMethodController extends BaseController {
 	
 	@RequestMapping(value = "/admin/method/createDubbo", method = { RequestMethod.POST })
 	public ModelAndView create(String groupCode, String apiMethodCode, String apiMethodName, String apiMethodVersion, String status, String verifiSso,
-			String mode, String methodDesc, String classPath, String methodName, String params) {
+			String mode, String methodDesc, String classPath, String methodName, String params,String clazz) {
         ModelAndView result = new ModelAndView();
         List<MethodParam> paramList = null;
         if(StrUtil.isNotEmpty(params)){

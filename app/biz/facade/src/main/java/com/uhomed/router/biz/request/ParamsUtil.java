@@ -134,6 +134,16 @@ public class ParamsUtil {
 								} );
 						
 						value = domain;
+					} else if(p.getClazz() instanceof Collection){
+						try {
+							value = JSON.parseArray(value.toString(),Object.class);
+//							value = TypeUtils.castToJavaBean(value,JSONArray.class);
+						} catch (Exception e) {
+							e.printStackTrace();
+							throw new ParamException( p.getName() + "为ArrayList类型，请检查参数类型！" );
+						}
+					} else if(p.getClazz().getClass().getName().equalsIgnoreCase(Map.class.getName())){
+
 					}
 				}
 				

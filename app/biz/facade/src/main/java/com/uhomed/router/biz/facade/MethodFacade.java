@@ -55,7 +55,7 @@ public interface MethodFacade {
 	 */
 	Result<String> updateMethod(Integer id, String apiMethodCode, String apiMethodName, String apiMethodVersion,
                                 String status, String verifiSso, String mode, String methodDesc, String type, String classPath,
-                                String methodName, List<MethodParam> paramList);
+                                String methodName, List<MethodParam> paramList,String registerType,String registerAddress);
 
 	/**
 	 * @param search

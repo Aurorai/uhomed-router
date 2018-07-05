@@ -6,6 +6,8 @@
 		<id property="methodId" column="METHOD_ID" />
 		<result property="classPath" column="CLASS_PATH" />
 		<result property="methodName" column="METHOD_NAME" />
+		<result property="registerType" column="REGISTER_TYPE" />
+		<result property="registerAddress" column="REGISTER_ADDRESS" />
 	</resultMap>
 
 	<sql id="MethodDubbo_common_condition">
@@ -37,7 +39,7 @@
 	</select>
 
 	<insert id="add" parameterType="com.uhomed.router.model.MethodDubbo" useGeneratedKeys="true" keyProperty="id">
-		INSERT INTO `METHOD_DUBBO` (`METHOD_ID`,`CLASS_PATH`,`METHOD_NAME`) VALUES (#{methodId},#{classPath},#{methodName})
+		INSERT INTO `METHOD_DUBBO` (`METHOD_ID`,`CLASS_PATH`,`METHOD_NAME`,`REGISTER_TYPE`,`REGISTER_ADDRESS`) VALUES (#{methodId},#{classPath},#{methodName},#{registerType},#{registerAddress})
 	</insert>
 
 	<delete id="delete" parameterType="com.uhomed.router.model.MethodDubbo">
@@ -53,6 +55,12 @@
 			</if>
 			<if test="methodName != null">
 				`METHOD_NAME` = #{methodName},
+			</if>
+			<if test="registerType != null">
+				`REGISTER_TYPE` = #{registerType},
+			</if>
+			<if test="registerAddress != null">
+				`REGISTER_ADDRESS` = #{registerAddress},
 			</if>
 		</trim>
 		WHERE METHOD_ID = #{methodId}

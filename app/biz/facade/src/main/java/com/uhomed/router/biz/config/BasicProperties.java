@@ -15,15 +15,15 @@ public class BasicProperties {
 
 
     /** zookeeper链接 */
-    public static String ZOOKEEPER_IP;
+//    public static String ZOOKEEPER_IP;
 
     /** 服务运行状态 */
     public static RunStatusContext RUN_STATUS;
 
-    @Value("${zookeeper.ip}")
-    public void setZookeeperIP(String zookeeperIP){
-        ZOOKEEPER_IP = zookeeperIP;
-    }
+//    @Value("${zookeeper.ip}")
+//    public void setZookeeperIP(String zookeeperIP){
+//        ZOOKEEPER_IP = zookeeperIP;
+//    }
 
     @Value("${run.status}")
     public void setRunStatus(String runStatus){

@@ -101,7 +101,7 @@ public class MethodFacadeImpl implements MethodFacade {
 	@Override
 	public Result<String> updateMethod(Integer id, String apiMethodCode, String apiMethodName, String apiMethodVersion,
 			String status, String verifiSso, String mode, String methodDesc, String type, String classPath,
-			String methodName, List<MethodParam> paramList) {
+			String methodName, List<MethodParam> paramList,String registerType,String registerAddress) {
 		Result<String> result = new Result<>();
 		
 		MethodInfo methodInfo = new MethodInfo();
@@ -114,7 +114,7 @@ public class MethodFacadeImpl implements MethodFacade {
 		methodInfo.setMode( mode );
 		methodInfo.setType( type );
 		methodInfo.setId( id );
-		
+
 		int count = (int) this.methodInfoService.update( methodInfo );
 		if (count > 0) {
 			result.setSuccess( true );
@@ -126,6 +126,8 @@ public class MethodFacadeImpl implements MethodFacade {
 				vo.setMethodId( id );
 				vo.setClassPath( classPath );
 				vo.setMethodName( methodName );
+				vo.setRegisterAddress(registerAddress);
+				vo.setRegisterType(registerType);
 				this.methodDubboService.update( vo );
 			}
 			
@@ -367,7 +369,7 @@ public class MethodFacadeImpl implements MethodFacade {
 		if (StrUtil.equals( method.getType(), MethodTypeContext.DUBBO.toString() )) {
 			MethodDubbo dubbo = this.methodDubboService.findById( method.getId() );
 			
-			MethodDTO m = new MethodDubboDTO( dubbo.getClassPath(), dubbo.getMethodName() );
+			MethodDTO m = new MethodDubboDTO( dubbo.getClassPath(), dubbo.getMethodName(),dubbo.getRegisterType(),dubbo.getRegisterAddress() );
 			return this.methodCache.putMethod( method.getId(), method.getApiMethodCode(), method.getApiMethodVersion(),
 					method.getStatus(), method.getVerifiSso(), MethodTypeContext.DUBBO, method.getMode(),
 					this.methodParam2Cache( this.methodParamService.queryByPage( params, -1, -1 ) ), m,
